@@ -6,7 +6,7 @@ set(TARGET_NAME "nanossl-test")
 
 # list its source files
 #
-set(SOURCE_FILES "MissingTestSourceTodo.cpp")
+set(SOURCE_FILES "expect_tests.cpp")
 
 # also list the targets under test (that the test target depends on)
 #

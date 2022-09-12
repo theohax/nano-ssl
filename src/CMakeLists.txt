@@ -6,7 +6,11 @@ set(TARGET_NAME "nanossl")
 
 # list its source files
 #
-set(SOURCE_FILES "MissingSourceTodo.cpp")
+set(SOURCE_FILES "private/expect/expect_or_log.cpp"
+                 "private/expect/expect_or_throw.cpp"
+                 "private/expect/detail/expect_impl.cpp"
+                 "private/log/log.cpp"
+                 "private/utils/recursion_guard.cpp")
 
 ########################################################################################################################
 

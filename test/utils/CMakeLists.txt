@@ -6,7 +6,8 @@ set(TARGET_NAME "nanossl-test-utils")
 
 # list its source files
 #
-set(SOURCE_FILES "MissingTestUtilsSource.cpp")
+set(SOURCE_FILES "std_output_redirect.cpp"
+                 "expected_failure_message.cpp")
 
 ########################################################################################################################
 
