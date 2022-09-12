@@ -3,9 +3,12 @@
 # function that sets the default CMake variables with general compilation features
 #
 function (set_general_compile_features)
-    set(CMAKE_CXX_STANDARD "20" PARENT_SCOPE)
-    set(CMAKE_CXX_STANDARD_REQUIRED "ON" PARENT_SCOPE)
-    set(CMAKE_CXX_EXTENSIONS "OFF" PARENT_SCOPE)
+    set(CMAKE_CXX_STANDARD "20" CACHE INTERNAL "")
+    set(CMAKE_CXX_STANDARD_REQUIRED "ON" CACHE INTERNAL "")
+    set(CMAKE_CXX_EXTENSIONS "OFF" CACHE INTERNAL "")
+    set(CMAKE_SKIP_RPATH "FALSE" CACHE INTERNAL "")
+    set(CMAKE_BUILD_WITH_INSTALL_RPATH "TRUE" CACHE INTERNAL "")
+    set(CMAKE_INSTALL_RPATH "@loader_path/../lib" CACHE INTERNAL "")
 endfunction()
 
 ########################################################################################################################
@@ -13,9 +16,9 @@ endfunction()
 # function that sets the default CMake variables with build output directories
 #
 function (set_build_output_directories)
-    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${BUILD_LIB_DIRECTORY}" PARENT_SCOPE)
-    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${BUILD_LIB_DIRECTORY}" PARENT_SCOPE)
-    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${BUILD_BIN_DIRECTORY}" PARENT_SCOPE)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${BUILD_LIB_DIRECTORY}" CACHE INTERNAL "")
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${BUILD_LIB_DIRECTORY}" CACHE INTERNAL "")
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${BUILD_BIN_DIRECTORY}" CACHE INTERNAL "")
 endfunction()
 
 ########################################################################################################################
@@ -61,7 +64,8 @@ function (get_compile_warnings RESULT)
                   "-Wmissing-declarations"
                   "-Wnoexcept"
                   "-Wnon-virtual-dtor"
-                  "-Wold-style-cast"
+                  #"-Wold-style-cast"
+            "-Wno-sign-compare"
                   "-Woverloaded-virtual"
                   "-Wredundant-decls"
                   "-Wshadow"
@@ -77,6 +81,14 @@ endfunction()
 #
 function (get_include_directories RESULT)
     set(${RESULT} "${SOURCE_DIRECTORY}" PARENT_SCOPE)
+endfunction()
+
+########################################################################################################################
+
+# function that returns the list of additional include directories to be provided when configuring a test target
+#
+function (get_test_include_directories RESULT)
+    set(${RESULT} "${ROOT_DIRECTORY}" PARENT_SCOPE)
 endfunction()
 
 ########################################################################################################################

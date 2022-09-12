@@ -1,20 +1,17 @@
 ########################################################################################################################
 
-# specify a recent CMake version
+# define the name of a new test library
 #
-cmake_minimum_required(VERSION "3.21.0")
+set(TARGET_NAME "nanossl-test-utils")
+
+# list its source files
+#
+set(SOURCE_FILES "MissingTestUtilsSource.cpp")
 
 ########################################################################################################################
 
-# define the project name and languages
+# define and configure the test library by specifying its name and list of source files
 #
-project("nano-ssl" LANGUAGES CXX)
-
-########################################################################################################################
-
-# call "main" CMake function
-#
-include("cmake/Main.cmake")
-main()
+configure_test_library("${TARGET_NAME}" "${SOURCE_FILES}")
 
 ########################################################################################################################

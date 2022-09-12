@@ -7,8 +7,8 @@ macro (main)
     # make sure the host (and target) systems are known
     #
     if (NOT (CMAKE_SYSTEM_NAME STREQUAL "Linux" OR
-            CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR
-            CMAKE_SYSTEM_NAME STREQUAL "Windows"))
+             CMAKE_SYSTEM_NAME STREQUAL "Darwin" OR
+             CMAKE_SYSTEM_NAME STREQUAL "Windows"))
         message(FATAL_ERROR "Unknown system `${CMAKE_SYSTEM_NAME}`.")
     endif()
 
@@ -18,6 +18,7 @@ macro (main)
     set(CMAKE_DIRECTORY "${ROOT_DIRECTORY}/cmake")
     set(SOURCE_DIRECTORY "${ROOT_DIRECTORY}/src")
     set(TEST_DIRECTORY "${ROOT_DIRECTORY}/test")
+    set(TEST_UTILS_DIRECTORY "${TEST_DIRECTORY}/utils")
     set(UNIT_TEST_DIRECTORY "${TEST_DIRECTORY}/unit")
     set(INTEGRATION_TEST_DIRECTORY "${TEST_DIRECTORY}/integration")
     set(BUILD_DIRECTORY "${CMAKE_BINARY_DIR}")
