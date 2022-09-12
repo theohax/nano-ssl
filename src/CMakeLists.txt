@@ -6,14 +6,21 @@ set(TARGET_NAME "nanossl")
 
 # list its source files
 #
-set(SOURCE_FILES "private/expect/expect_or_log.cpp"
-                 "private/expect/expect_or_throw.cpp"
-                 "private/expect/detail/expect_impl.cpp"
-                 "private/log/log.cpp"
+set(SOURCE_FILES "private/impl/certificate_builder_impl.cpp"
+                 "private/impl/certificate_impl.cpp"
+                 "private/impl/key_pair_impl.cpp"
                  "private/openssl/bio.cpp"
                  "private/openssl/error.cpp"
                  "private/openssl/handles/buffer.cpp"
-                 "private/utils/recursion_guard.cpp")
+                 "private/expect/expect_or_throw.cpp"
+                 "private/expect/expect_or_log.cpp"
+                 "private/expect/detail/expect_impl.cpp"
+                 "private/log/log.cpp"
+                 "private/utils/recursion_guard.cpp"
+                 "public/certificate.cpp"
+                 "public/certificate_builder.cpp"
+                 "public/key_pair.cpp"
+                 "public/time_interval.cpp")
 
 ########################################################################################################################
 
