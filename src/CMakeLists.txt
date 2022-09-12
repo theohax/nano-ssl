@@ -10,6 +10,9 @@ set(SOURCE_FILES "private/expect/expect_or_log.cpp"
                  "private/expect/expect_or_throw.cpp"
                  "private/expect/detail/expect_impl.cpp"
                  "private/log/log.cpp"
+                 "private/openssl/bio.cpp"
+                 "private/openssl/error.cpp"
+                 "private/openssl/handles/buffer.cpp"
                  "private/utils/recursion_guard.cpp")
 
 ########################################################################################################################
