@@ -1,10 +1,12 @@
+########################################################################################################################
+
 # define the name of a new target
 #
-set(TARGET_NAME "nano-ssl")
+set(TARGET_NAME "nanossl")
 
 # list its source files
 #
-set(SOURCE_FILES "common/Basic.cpp")
+set(SOURCE_FILES "MissingSourceTodo.cpp")
 
 ########################################################################################################################
 

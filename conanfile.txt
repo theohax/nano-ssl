@@ -25,11 +25,12 @@ gtest:no_main=False
 
 # gtest
 #
-lib, libgtest*.* -> bin
+lib, libgtest*.*.dylib* -> bin
+lib, libgtest*.*.so* -> lib
 
 # openssl
 #
-lib, libcrypto*.* -> bin
-lib, libssl*.* -> bin
+lib, libcrypto.*.* -> lib
+lib, libssl.*.* -> lib
 
 ########################################################################################################################

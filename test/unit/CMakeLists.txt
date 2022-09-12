@@ -1,14 +1,16 @@
+########################################################################################################################
+
 # define the name of a new test target
 #
-set(TARGET_NAME "nano-ssl-test")
+set(TARGET_NAME "nanossl-test")
 
 # list its source files
 #
-set(SOURCE_FILES "BasicTests.cpp")
+set(SOURCE_FILES "MissingTestSourceTodo.cpp")
 
 # also list the targets under test (that the test target depends on)
 #
-set(TARGETS_UNDER_TEST "nano-ssl")
+set(TARGETS_UNDER_TEST "nanossl")
 
 ########################################################################################################################
 

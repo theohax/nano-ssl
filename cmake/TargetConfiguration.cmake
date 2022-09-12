@@ -75,6 +75,25 @@ endfunction()
 
 ########################################################################################################################
 
+# function that defines a test library to be linked with by test targets
+#
+function (configure_test_library TARGET_NAME SOURCE_FILES)
+    _private_check_target_source_files("${TARGET_NAME}" "${SOURCE_FILES}")
+
+    add_library("${TARGET_NAME}" STATIC "${SOURCE_FILES}")
+
+    _private_apply_build_options_to_target("${TARGET_NAME}")
+
+    get_test_include_directories(TEST_INCLUDE_DIRECTORIES_RESULT)
+    target_include_directories("${TARGET_NAME}" PRIVATE "${TEST_INCLUDE_DIRECTORIES_RESULT}")
+
+    get_property(TEST_LIBRARIES_RESULT GLOBAL PROPERTY GLOBAL_PROPERTY_TEST_LIBRARIES)
+    list(APPEND TEST_LIBRARIES_RESULT "${TARGET_NAME}")
+    set_property(GLOBAL PROPERTY GLOBAL_PROPERTY_TEST_LIBRARIES "${TEST_LIBRARIES_RESULT}")
+endfunction()
+
+########################################################################################################################
+
 # function that defines a new test target (given its name,
 # a list of other targets that it tests and therefore depends on and the
 # list of its own source files) and configures it with all the necessary flags for building
@@ -88,8 +107,13 @@ function (configure_test_target TARGET_NAME TARGETS_UNDER_TEST SOURCE_FILES)
     add_test(NAME "${TARGET_NAME}" COMMAND "${TARGET_NAME}")
 
     _private_apply_build_options_to_target("${TARGET_NAME}")
+
     get_test_libraries_to_link_against(TEST_LIBRARIES_RESULT)
-    target_link_libraries("${TARGET_NAME}" PRIVATE "${TEST_LIBRARIES_RESULT}")
+    get_property(CUSTOM_TEST_LIBRARIES_RESULT GLOBAL PROPERTY GLOBAL_PROPERTY_TEST_LIBRARIES)
+    target_link_libraries("${TARGET_NAME}" PRIVATE "${TEST_LIBRARIES_RESULT}" "${CUSTOM_TEST_LIBRARIES_RESULT}")
+
+    get_test_include_directories(TEST_INCLUDE_DIRECTORIES_RESULT)
+    target_include_directories("${TARGET_NAME}" PRIVATE "${TEST_INCLUDE_DIRECTORIES_RESULT}")
 
     foreach (DEPENDENCY_TARGET "${TARGETS_UNDER_TEST}")
         if (NOT TARGET "${DEPENDENCY_TARGET}")
@@ -97,8 +121,7 @@ function (configure_test_target TARGET_NAME TARGETS_UNDER_TEST SOURCE_FILES)
                                 "`${DEPENDENCY_TARGET}` needed by test target `${TARGET_NAME}`.")
         endif()
 
-        # TODO: check
-        target_sources("${TARGET_NAME}" PRIVATE $<TARGET_OBJECTS:${DEPENDENCY_TARGET}>)
+        target_sources("${TARGET_NAME}" PRIVATE "$<TARGET_OBJECTS:${DEPENDENCY_TARGET}>")
     endforeach()
 endfunction()
 
