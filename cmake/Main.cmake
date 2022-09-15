@@ -17,24 +17,32 @@ macro (main)
     set(ROOT_DIRECTORY "${CMAKE_SOURCE_DIR}")
     set(CMAKE_DIRECTORY "${ROOT_DIRECTORY}/cmake")
     set(SOURCE_DIRECTORY "${ROOT_DIRECTORY}/src")
+    set(SOURCE_PUBLIC_DIRECTORY "${SOURCE_DIRECTORY}/public")
     set(TEST_DIRECTORY "${ROOT_DIRECTORY}/test")
     set(TEST_UTILS_DIRECTORY "${TEST_DIRECTORY}/utils")
-    set(UNIT_TEST_DIRECTORY "${TEST_DIRECTORY}/unit")
-    set(INTEGRATION_TEST_DIRECTORY "${TEST_DIRECTORY}/integration")
+    set(TEST_UNIT_DIRECTORY "${TEST_DIRECTORY}/unit")
+    set(TEST_INTEGRATION_DIRECTORY "${TEST_DIRECTORY}/integration")
     set(BUILD_DIRECTORY "${CMAKE_BINARY_DIR}")
     set(BUILD_BIN_DIRECTORY "${BUILD_DIRECTORY}/bin")
+    set(BUILD_GENERATED_DIRECTORY "${BUILD_DIRECTORY}/generated")
+    set(BUILD_GENERATED_PUBLIC_DIRECTORY "${BUILD_GENERATED_DIRECTORY}/public")
     set(BUILD_LIB_DIRECTORY "${BUILD_DIRECTORY}/lib")
 
     # include other CMake scripts
     #
+    include("GNUInstallDirs")
     include("${CMAKE_DIRECTORY}/BuildOptions.cmake")
     include("${CMAKE_DIRECTORY}/Conan.cmake")
     include("${CMAKE_DIRECTORY}/Dependencies.cmake")
+    include("${CMAKE_DIRECTORY}/Installation.cmake")
+    include("${CMAKE_DIRECTORY}/Options.cmake")
     include("${CMAKE_DIRECTORY}/TargetConfiguration.cmake")
+    include("${CMAKE_DIRECTORY}/Utils.cmake")
 
     # call other "main" functions
     #
     conan_main()
+    options_main()
 
     # continue processing other CMakeLists files
     #

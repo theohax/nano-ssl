@@ -1,3 +1,4 @@
+#include "public/certificate.hpp"
 #include "public/certificate_builder.hpp"
 #include "public/key_pair.hpp"
 
