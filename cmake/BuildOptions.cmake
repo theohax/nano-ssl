@@ -6,9 +6,12 @@ function (set_general_compile_features)
     set(CMAKE_CXX_STANDARD "20" CACHE INTERNAL "")
     set(CMAKE_CXX_STANDARD_REQUIRED "ON" CACHE INTERNAL "")
     set(CMAKE_CXX_EXTENSIONS "OFF" CACHE INTERNAL "")
-    set(CMAKE_SKIP_RPATH "FALSE" CACHE INTERNAL "")
-    set(CMAKE_BUILD_WITH_INSTALL_RPATH "TRUE" CACHE INTERNAL "")
-    set(CMAKE_INSTALL_RPATH "@loader_path/../lib" CACHE INTERNAL "")
+
+    # TODO: fix these, make RPATH setting work on both Linux/MacOS for shared lib artefacts; low prio for now
+    #
+    # set(CMAKE_SKIP_RPATH "FALSE" CACHE INTERNAL "")
+    # set(CMAKE_BUILD_WITH_INSTALL_RPATH "TRUE" CACHE INTERNAL "")
+    # set(CMAKE_INSTALL_RPATH "@loader_path/../lib" CACHE INTERNAL "")
 endfunction()
 
 ########################################################################################################################
@@ -64,8 +67,8 @@ function (get_compile_warnings RESULT)
                   "-Wmissing-declarations"
                   "-Wnoexcept"
                   "-Wnon-virtual-dtor"
-                  #"-Wold-style-cast"
-            "-Wno-sign-compare"
+                  "-Wold-style-cast"
+                  "-Wno-sign-compare"
                   "-Woverloaded-virtual"
                   "-Wredundant-decls"
                   "-Wshadow"

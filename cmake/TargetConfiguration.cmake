@@ -80,7 +80,7 @@ endfunction()
 function (configure_test_library TARGET_NAME SOURCE_FILES)
     _private_check_target_source_files("${TARGET_NAME}" "${SOURCE_FILES}")
 
-    add_library("${TARGET_NAME}" STATIC "${SOURCE_FILES}")
+    add_library("${TARGET_NAME}" OBJECT "${SOURCE_FILES}")
 
     _private_apply_build_options_to_target("${TARGET_NAME}")
 
@@ -109,8 +109,7 @@ function (configure_test_target TARGET_NAME TARGETS_UNDER_TEST SOURCE_FILES)
     _private_apply_build_options_to_target("${TARGET_NAME}")
 
     get_test_libraries_to_link_against(TEST_LIBRARIES_RESULT)
-    get_property(CUSTOM_TEST_LIBRARIES_RESULT GLOBAL PROPERTY GLOBAL_PROPERTY_TEST_LIBRARIES)
-    target_link_libraries("${TARGET_NAME}" PRIVATE "${TEST_LIBRARIES_RESULT}" "${CUSTOM_TEST_LIBRARIES_RESULT}")
+    target_link_libraries("${TARGET_NAME}" PRIVATE "${TEST_LIBRARIES_RESULT}")
 
     get_test_include_directories(TEST_INCLUDE_DIRECTORIES_RESULT)
     target_include_directories("${TARGET_NAME}" PRIVATE "${TEST_INCLUDE_DIRECTORIES_RESULT}")

@@ -22,10 +22,26 @@ set(SOURCE_FILES "private/impl/certificate_builder_impl.cpp"
                  "public/key_pair.cpp"
                  "public/time_interval.cpp")
 
+# list its public API header files
+#
+set(PUBLIC_HEADER_FILES "public/buffer.hpp"
+                        "public/buffer_view.hpp"
+                        "public/certificate.hpp"
+                        "public/certificate_builder.hpp"
+                        "public/key_pair.hpp"
+                        "public/time_interval.hpp"
+                        "public/detail/declare_facade.hpp"
+                        "public/detail/shared_facade.hpp"
+                        "public/detail/unique_facade.hpp")
+
 ########################################################################################################################
 
 # define and configure the target by specifying its name, type and list of source files
 #
-configure_target("${TARGET_NAME}" "SHARED_LIBRARY" "${SOURCE_FILES}")
+configure_target("${TARGET_NAME}" "${NANOSSL_LIBRARIES_TYPE}" "${SOURCE_FILES}")
+
+# install the target
+#
+installation_do_target("${TARGET_NAME}" "${PUBLIC_HEADER_FILES};public")
 
 ########################################################################################################################
