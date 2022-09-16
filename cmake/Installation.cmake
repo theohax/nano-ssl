@@ -7,12 +7,10 @@ function (_installation_copy_headers_to_generated PUBLIC_HEADER_FILES_AND_DIRECT
     foreach (HEADER_FILE_OR_DIRECTORY IN LISTS PUBLIC_HEADER_FILES_AND_DIRECTORIES)
         utils_is_directory("${HEADER_FILE_OR_DIRECTORY}" IS_DIRECTORY_RESULT)
         if (IS_DIRECTORY_RESULT STREQUAL "1")
-            message(STATUS "DIR ${FILES_UNDER_DIRECTORY}, moving all underneath")
             file(COPY "${HEADER_FILE_OR_DIRECTORY}/"
                  DESTINATION "${BUILD_GENERATED_PUBLIC_DIRECTORY}"
                  FILES_MATCHING PATTERN "*.hpp")
         else()
-            message(STATUS "FILE ${HEADER_FILE_OR_DIRECTORY}, moving just it")
             file(COPY "${HEADER_FILE_OR_DIRECTORY}" DESTINATION "${BUILD_GENERATED_PUBLIC_DIRECTORY}")
         endif()
     endforeach()

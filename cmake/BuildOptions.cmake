@@ -58,14 +58,13 @@ endfunction()
 # function that returns the list of compilation warnings to be used when configuring a target
 #
 function (get_compile_warnings RESULT)
-    set(${RESULT} "-Wall"
+    set(LOCAL_RESULT "-Wall"
                   "-Wextra"
                   "-Wpedantic"
                   "-Wfloat-equal"
                   "-Wctor-dtor-privacy"
                   "-Winit-self"
                   "-Wmissing-declarations"
-                  "-Wnoexcept"
                   "-Wnon-virtual-dtor"
                   "-Wold-style-cast"
                   "-Wno-sign-compare"
@@ -74,8 +73,13 @@ function (get_compile_warnings RESULT)
                   "-Wshadow"
                   "-Wsign-promo"
                   "-Wswitch-default"
-                  "-Wundef"
-       PARENT_SCOPE)
+                  "-Wundef")
+
+    if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+        list(APPEND LOCAL_RESULT "-Wnoexcept")
+    endif()
+
+    set("${RESULT}" "${LOCAL_RESULT}" PARENT_SCOPE)
 endfunction()
 
 ########################################################################################################################

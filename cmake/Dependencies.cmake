@@ -3,8 +3,11 @@
 # function that returns the list of third party libraries (dependencies) that a target needs to link against
 #
 function (get_libraries_to_link_against RESULT)
-    set(LOCAL_RESULT "${CONAN_TARGETS}"
-                     stdc++fs)
+    set(LOCAL_RESULT "${CONAN_TARGETS}")
+
+    if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+        list(APPEND LOCAL_RESULT "stdc++fs")
+    endif()
 
     get_test_libraries_to_link_against(TEST_LIBRARIES_RESULT)
     list(REMOVE_ITEM LOCAL_RESULT "${TEST_LIBRARIES_RESULT}")
